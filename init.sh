@@ -1,13 +1,15 @@
 #!/bin/sh
 config_dir="/home/ubuntu/cloudquery"
 Environmentfile="/etc/default/cloudquery"
+Secretid="cloudquery"
+aws_region="ap-south-1"
 
 # Create the directory if it doesn't exist
 if [ ! -d "$config_dir" ]; then
     mkdir -p "$config_dir"
 fi
 
-dbsecrets=$(aws secretsmanager get-secret-value --secret-id  rds/mux/cloudquery --query SecretString | jq -r)
+dbsecrets=$(aws secretsmanager get-secret-value --secret-id  $Secretid --query SecretString  --region $aws_region | jq -r)
 db_user=$(echo $dbsecrets | jq '.username' -r)
 db_passwd=$(echo $dbsecrets | jq '.password' -r)
 db_host=$(echo $dbsecrets | jq '.host' -r)
