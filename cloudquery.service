@@ -1,0 +1,16 @@
+[Unit]
+Description=CloudQuery Docker Compose Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=notify
+User=root
+Group=root
+WorkingDirectory=/home/ubuntu/cloudquery
+ExecStart=/usr/bin/docker-compose up -d --remove-orphans
+ExecStop=/usr/bin/docker-compose down
+EnvironmentFile=/etc/default/cloudquery
+
+[Install]
+WantedBy=multi-user.tar

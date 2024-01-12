@@ -1,0 +1,10 @@
+[Unit]
+Description=cloudquery service timer
+
+[Timer]
+OnBootSec=0min
+OnCalendar=*-*-* 09:30:00
+Unit=cloudquery.service
+
+[Install]
+WantedBy=multi-user.target

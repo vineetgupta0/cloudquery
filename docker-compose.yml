@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  cloudquery:
+    image: ghcr.io/cloudquery/cloudquery:4.4-linux-arm64
+    container_name: cloudquery
+    volumes:
+      - /home/ubuntu/cloudquery/config.yml:/config.yml
+    command: ["sync", "/config.yml"]
+    environment:
+      - AWS_SDK_LOAD_CONFIG=true

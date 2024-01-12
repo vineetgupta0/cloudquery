@@ -1,0 +1,23 @@
+kind: source
+spec:
+  name: aws
+  path: cloudquery/aws
+  version: "v22.19.2"
+  tables: ["*"]
+  skip_tables:
+    - aws_stepfunctions_map_runs
+  destinations: ["postgresql"]
+  spec:
+    aws_debug: false
+    regions: 
+     - "ap-south-1"
+     - "us-east-1"
+  
+---
+kind: destination
+spec:
+  name: "postgresql"
+  path: "cloudquery/postgresql"
+  version: "v7.1.5"
+  spec:
+    connection_string: ${PG_CONNECTION_STRING}
